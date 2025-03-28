@@ -245,6 +245,15 @@ Pedidos entre R$50,00 e R$199,99 (inclusive) → "Frete com custo adicional!"
 Pedidos de R$200,00 ou mais → "Frete grátis!"
 ```
 Implemente um pseudocódigo que receba o valor total da compra e exiba a classificação correta do frete para o cliente.
+    
+    Se valor_total < 50.00 Então
+        Escreva "Frete não disponível!"
+    Senão Se valor_total >= 50.00 e valor_total <= 199.99 Então
+        Escreva "Frete com custo adicional!"
+    Senão
+        Escreva "Frete grátis!"
+
+
 ______
 
 **8)** Considere a implementação da classe base Veiculo em um sistema de modelagem de veículos. Sua tarefa é implementar, utilizando pseudocódigo, as classes derivadas Carro e Moto, que herdam da classe Veiculo, adicionando atributos específicos e métodos para calcular o consumo de combustível de um carro e de uma moto, respectivamente.
@@ -262,6 +271,48 @@ Método CalcularConsumo():
 ```
 Implementação genérica para cálculo de consumo, a ser sobrescrita pelas subclasses.
 Agora, implemente as classes Carro e Moto, garantindo que ambas herdem de Veiculo e possuam métodos específicos para calcular o consumo de combustível com base na quilometragem e eficiência do veículo.
+
+````javascript
+class Veiculo {
+    constructor(modelo, ano) {
+        this.modelo = modelo;
+        this.ano = ano;
+    }
+
+    calcularConsumo() {}
+}
+
+class Carro extends Veiculo {
+    constructor(modelo, ano, eficiencia) {
+        super(modelo, ano);
+        this.eficiencia = eficiencia; // km por litro
+    }
+
+    calcularConsumo(quilometragem) {
+        if (this.eficiencia > 0) {
+            return quilometragem / this.eficiencia;
+        } else {
+            return "Eficiência inválida!";
+        }
+    }
+}
+
+class Moto extends Veiculo {
+    constructor(modelo, ano, eficiencia) {
+        super(modelo, ano);
+        this.eficiencia = eficiencia; // km por litro
+    }
+
+    calcularConsumo(quilometragem) {
+        if (this.eficiencia > 0) {
+            return quilometragem / this.eficiencia;
+        } else {
+            return "Eficiência inválida!";
+        }
+    }
+}
+
+````
 ______
 
 **9)** Você é um cientista da NASA e está ajudando no desenvolvimento de um sistema de pouso para sondas espaciais em Marte. Seu objetivo é calcular o tempo necessário para que a sonda reduza sua velocidade até um nível seguro para pouso, considerando uma velocidade inicial de entrada na atmosfera marciana e uma taxa de desaceleração constante causada pelo atrito atmosférico e retrofoguetes.
@@ -275,11 +326,32 @@ Considere a fórumla de atualização velocidade:
     velocidade = velocidadeInicial - desaceleracao * tempo
 ```
 Seu programa deve determinar quanto tempo será necessário para que a sonda atinja uma velocidade segura de pouso, sem ultrapassar os limites estabelecidos.
+
+````javascript
+function simularPouso(velocidadeInicial, desaceleracao, velocidadeSegura, tempoMaximo) {
+    let tempo = 0;
+    let velocidade = velocidadeInicial;
+
+    while (velocidade > velocidadeSegura && tempo < tempoMaximo) {
+        tempo++;
+        velocidade -= desaceleracao;
+
+        if (velocidade <= velocidadeSegura) {
+            console.log(`Pouso seguro alcançado em ${tempo} segundos.`);
+            return;
+        }
+    }
+
+    console.log("Tempo máximo excedido! Pouso arriscado.");
+}
+````
 ______
 
 **10)** Em um sistema de análise financeira, as operações de investimento de uma empresa podem ser representadas por matrizes, onde cada linha representa um tipo de investimento e cada coluna representa um período de tempo.
 
 A seguir, é fornecida a implementação da função SomarMatrizesInvestimento(matrizA, matrizB), que soma os valores de duas matrizes de investimento. Sua tarefa é implementar uma função semelhante, porém que realize a multiplicação das matrizes de investimento, determinando como os investimentos afetam os resultados ao longo do tempo.
+
+
 
 ```
 Função SomarMatrizesInvestimento(matrizA, matrizB):  
@@ -307,3 +379,45 @@ Escrever("Total de investimentos acumulados:")
 ImprimirMatriz(totalInvestimentos)  
 ```
 Agora, implemente a função MultiplicarMatrizesInvestimento(matrizA, matrizB), que multiplica as duas matrizes, simulando o efeito de diferentes fatores de crescimento e impacto financeiro nos investimentos ao longo do tempo.
+
+````javascript
+function multiplicarMatrizes(matrizA, matrizB) {
+    let linhasA = matrizA.length;
+    let colunasA = matrizA[0].length;
+    let linhasB = matrizB.length;
+    let colunasB = matrizB[0].length;
+
+    if (colunasA !== linhasB) {
+        console.log("Erro: O número de colunas de A deve ser igual ao número de linhas de B.");
+        return null;
+    }
+
+    let matrizResultado = Array.from({ length: linhasA }, () => Array(colunasB).fill(0));
+
+    for (let i = 0; i < linhasA; i++) {
+        for (let j = 0; j < colunasB; j++) {
+            let soma = 0;
+            for (let k = 0; k < colunasA; k++) {
+                soma += matrizA[i][k] * matrizB[k][j];
+            }
+            matrizResultado[i][j] = soma;
+        }
+    }
+
+    return matrizResultado;
+}
+
+// Exemplo de uso
+let matrizA = [
+    [1, 2],
+    [3, 4]
+];
+
+let matrizB = [
+    [5, 6],
+    [7, 8]
+];
+
+console.log("Resultado da multiplicação das matrizes:");
+console.table(multiplicarMatrizes(matrizA, matrizB));
+````
