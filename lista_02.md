@@ -107,7 +107,7 @@ A) Ambas as funções exibirão: 'Seu crédito foi aprovado. Saldo disponível: 
 
 B) analisarCredito1() exibirá: 'Seu crédito foi negado. Saldo disponível: -600.', enquanto analisarCredito2() exibirá: 'Seu crédito foi negado. Saldo disponível: -200.'
 
-C) analisarCredito1() exibirá: 'Seu crédito foi negado. Saldo disponível: -200.', enquanto analisarCredito2() exibirá: 'Seu crédito foi aprovado. Saldo disponível: 100.'
+ ===> C) analisarCredito1() exibirá: 'Seu crédito foi negado. Saldo disponível: -200.', enquanto analisarCredito2() exibirá: 'Seu crédito foi aprovado. Saldo disponível: 100.'
 
 D) Ambas as funções exibirão: 'Seu crédito foi aprovado Saldo disponível: 500.'
 ______
